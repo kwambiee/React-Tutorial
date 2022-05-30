@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import InputTodo from './InputTodo';
 import TodosList from './TodosList';
@@ -48,6 +48,12 @@ const TodoContainer = () => {
       })
     );
   };
+
+  useEffect(() => {
+    // storing todos items
+    const temp = JSON.stringify(todos);
+    localStorage.setItem('todos', temp);
+  }, [todos]);
 
   function getInitialTodos() {
     // getting stored items
