@@ -5,10 +5,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './functionBased/App.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <TodoContainer />
-    </Router>
-  </React.StrictMode>,
+  <Router>
+    <TodoContainer />
+  </Router>,
   document.getElementById('root')
 );

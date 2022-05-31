@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
@@ -32,11 +32,11 @@ const TodoItem = (props) => {
     editMode.display = 'none';
   }
 
-  useEffect(() => {
-    return () => {
-      console.log('Cleaning up...');
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('Cleaning up...');
+  //   };
+  // }, []);
 
   return (
     <li className={styles.item}>
