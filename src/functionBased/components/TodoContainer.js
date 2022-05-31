@@ -3,10 +3,10 @@ import Header from './Header';
 import InputTodo from './InputTodo';
 import TodosList from './TodosList';
 import { v4 as uuidv4 } from 'uuid';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import About from '../pages/About';
+import SinglePage from '../pages/SinglePage';
 import NotMatch from '../pages/NotMatch';
-import Navbar from './Navbar';
 
 const TodoContainer = () => {
   const [todos, setTodos] = useState(getInitialTodos());
@@ -66,26 +66,45 @@ const TodoContainer = () => {
     return savedTodos || [];
   }
 
-  return (
-    <>
-      <Navbar />
-      <div className="container">
-        <div className="inner">
-          <Header />
-          <InputTodo addTodoProps={addTodoItem} />
-          <TodosList
-            todos={todos}
-            handleChangeProps={handleChange}
-            deleteTodoProps={delTodo}
-            setUpdate={setUpdate}
-          />
+  const Component = () => {
+    return (
+      <>
+        <div className="container">
+          <div className="inner">
+            <Header />
+            <InputTodo addTodoProps={addTodoItem} />
+            <TodosList
+              todos={todos}
+              handleChangeProps={handleChange}
+              deleteTodoProps={delTodo}
+              setUpdate={setUpdate}
+            />
+          </div>
         </div>
+      </>
+    );
+  };
+
+  return (
+    <div>
+      <nav className="navBar">
+        <Link to="/" className="active-link">
+          Home
+        </Link>
+        <Link to="/about" className="active-link">
+          About
+        </Link>
+      </nav>
+      <div className="about">
+        <Routes>
+          <Route path="/" element={<Component />} />
+          <Route path="about" element={<About />}>
+            <Route path=":slug" element={<SinglePage />} />
+          </Route>
+          <Route path="*" element={<NotMatch />} />
+        </Routes>
       </div>
-      <Routes>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="*" element={<NotMatch />}></Route>
-      </Routes>
-    </>
+    </div>
   );
 };
 
