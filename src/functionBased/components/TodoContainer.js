@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { Routes, Route, Link } from 'react-router-dom';
 import Header from './Header';
 import InputTodo from './InputTodo';
 import TodosList from './TodosList';
-import { v4 as uuidv4 } from 'uuid';
-import { Routes, Route, Link } from 'react-router-dom';
 import About from '../pages/About';
 import SinglePage from '../pages/SinglePage';
 import NotMatch from '../pages/NotMatch';
@@ -12,31 +12,27 @@ const TodoContainer = () => {
   const [todos, setTodos] = useState(getInitialTodos());
 
   const handleChange = (id) => {
-    setTodos((prevState) =>
-      prevState.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        }
-        return todo;
-      })
-    );
+    setTodos((prevState) => prevState.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          completed: !todo.completed,
+        };
+      }
+      return todo;
+    }));
   };
 
   const delTodo = (id) => {
     setTodos([
-      ...todos.filter((todo) => {
-        return todo.id !== id;
-      }),
+      ...todos.filter((todo) => todo.id !== id),
     ]);
   };
 
   const addTodoItem = (title) => {
     const newTodo = {
       id: uuidv4(),
-      title: title,
+      title,
       completed: false,
     };
     setTodos([...todos, newTodo]);
@@ -49,7 +45,7 @@ const TodoContainer = () => {
           todo.title = updatedTitle;
         }
         return todo;
-      })
+      }),
     );
   };
 
@@ -66,24 +62,22 @@ const TodoContainer = () => {
     return savedTodos || [];
   }
 
-  const Component = () => {
-    return (
-      <>
-        <div className="container">
-          <div className="inner">
-            <Header />
-            <InputTodo addTodoProps={addTodoItem} />
-            <TodosList
-              todos={todos}
-              handleChangeProps={handleChange}
-              deleteTodoProps={delTodo}
-              setUpdate={setUpdate}
-            />
-          </div>
+  const Component = () => (
+    <>
+      <div className="container">
+        <div className="inner">
+          <Header />
+          <InputTodo addTodoProps={addTodoItem} />
+          <TodosList
+            todos={todos}
+            handleChangeProps={handleChange}
+            deleteTodoProps={delTodo}
+            setUpdate={setUpdate}
+          />
         </div>
-      </>
-    );
-  };
+      </div>
+    </>
+  );
 
   return (
     <div>

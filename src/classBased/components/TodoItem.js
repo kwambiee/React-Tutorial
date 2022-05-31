@@ -23,8 +23,8 @@ class TodoItem extends React.Component {
   }
 
   render() {
-    let viewMode = {};
-    let editMode = {};
+    const viewMode = {};
+    const editMode = {};
 
     if (this.state.editing) {
       viewMode.display = 'none';

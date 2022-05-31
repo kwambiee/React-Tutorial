@@ -23,20 +23,14 @@ const TodoItem = (props) => {
 
   const { completed, id, title } = props.todo;
 
-  let viewMode = {};
-  let editMode = {};
+  const viewMode = {};
+  const editMode = {};
 
   if (editing) {
     viewMode.display = 'none';
   } else {
     editMode.display = 'none';
   }
-
-  // useEffect(() => {
-  //   return () => {
-  //     console.log('Cleaning up...');
-  //   };
-  // }, []);
 
   return (
     <li className={styles.item}>

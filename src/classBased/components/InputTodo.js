@@ -10,6 +10,7 @@ class InputTodo extends Component {
       title: e.target.value,
     });
   };
+
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.title.trim()) {
